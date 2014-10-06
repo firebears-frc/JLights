@@ -414,6 +414,7 @@ static inline void na_process_byte(byte p_byte) {
 
 void na_receiveEvent(int howMany)
 {
+//  Serial.println("R");
   //Check If Packet Is Null
   if(howMany == 0) {
     Serial.println("No byte packet!");

@@ -63,4 +63,4 @@
     #define LT_MAGIC 0x4C //"I'm connected!" (magic byte)
 
 //I2C info
-	#define SLAVE_ADDRESS 0x02
+	#define SLAVE_ADDRESS 0x04
