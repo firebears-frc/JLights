@@ -134,9 +134,10 @@ void setup() {
   Serial.print("JLights: loading.... / ");
   print_free_bytes();
   delay(100);
-  Wire.begin(SLAVE_ADDRESS);       // join i2c bus with address SLAVE_ADRESS (
+  Wire.begin(SLAVE_ADDRESS);       // join i2c bus with address SLAVE_ADRESS
   Wire.onReceive(na_receiveEvent); // register event
   Wire.onRequest(na_requestEvent); // register event
+  delay(10);
   na_reset();
   Serial.print("ANIMATION(done loading!), ");
   print_free_bytes();

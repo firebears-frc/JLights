@@ -6,34 +6,30 @@ void setup()
 {
   Wire.begin(); // join i2c bus (address optional for master)
   Serial.begin(9600);  // start serial for output
+  while(!Serial);
+  Serial.println("false CRio");
 }
 
 void recv() {
-  delay(10);
-  Wire.requestFrom(DEVICE, 2);    // request 2 bytes from slave device #2
-
-  Serial.println("checking...\n");
-
-  while(!Wire.available());
-  
-  Serial.print("response: ");
-
+  Wire.requestFrom(4, 6);    // request 6 bytes from slave device #2
+  delay(10); //Puts space between transmissions to prevent packet loss & freezing
   while(Wire.available())    // slave may send less than requested
   { 
     char c = Wire.read(); // receive a byte as character
     Serial.print(c);         // print the character
   }
   Serial.println();
+
+  delay(100);
 }
 
-void sndp(byte x, byte y) {
+void sndp(char x, char y) {
   Serial.println("sending....");
-  Wire.beginTransmission(DEVICE); // transmit to device #4
-  Serial.println("SFD");
-  Wire.write(x);                  // sends one byte
-  Wire.write(y);                  // sends one byte 
-  Serial.println("ending..."); 
-  Wire.endTransmission();         // stop transmitting
+  Wire.beginTransmission(4); // transmit to device #4
+  Serial.println(Wire.write(x));        // sends five bytes
+  Serial.println(Wire.write(y));              // sends one byte  
+  Serial.println(Wire.endTransmission());    // stop transmitting
+  delay(100); //Puts space between transmissions to prevent packet loss & freezing
   Serial.println("sent");
 }
 
