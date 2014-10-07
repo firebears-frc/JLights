@@ -4,6 +4,7 @@ void setup()
 {
   Wire.begin(4);                // join i2c bus with address #4
   Wire.onReceive(receiveEvent); // register event
+  Wire.onRequest(requestEvent); // register event2
   Serial.begin(9600);           // start serial for output
   Serial.println("AY!");
 }
@@ -23,4 +24,10 @@ void receiveEvent(int howMany)
     char c = Wire.read(); // receive byte as a character
     Serial.print(c);         // print the character
   }
+}
+
+void requestEvent()
+{
+  Wire.write("hello "); // respond with message of 6 bytes
+                       // as expected by master
 }
